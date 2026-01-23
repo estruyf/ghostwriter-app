@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@source "../node_modules/streamdown/dist/*.js";
+
+@layer base {
+  body {
+    @apply min-h-screen text-[#e8edf5] antialiased;
+    background:
+      radial-gradient(
+        circle at 10% 20%,
+        rgba(34, 211, 238, 0.08),
+        transparent 25%
+      ),
+      radial-gradient(
+        circle at 80% 0%,
+        rgba(124, 58, 237, 0.16),
+        transparent 32%
+      ),
+      linear-gradient(180deg, #0b1021 0%, #0b1224 70%, #0a0f1d 100%);
+    font-family:
+      "Inter",
+      "SF Pro Display",
+      "Segoe UI",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+}
