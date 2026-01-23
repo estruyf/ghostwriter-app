@@ -4,6 +4,8 @@ A test project demonstrating the new
 [GitHub Copilot SDK](https://github.com/github/copilot-sdk) for building
 AI-powered content creation tools.
 
+![Ghostwriter App Screenshot](./assets/ghostwriter-app-screenshot.png)
+
 ## What is Ghostwriter?
 
 Ghostwriter is an AI-assisted content creation application that helps you
@@ -148,3 +150,13 @@ adapted to use the GitHub Copilot SDK instead of direct API integrations.
 - [Ghostwriter Agents Project](https://github.com/estruyf/ghostwriter-agents-ai)
 - [Astro Documentation](https://docs.astro.build)
 
+## License
+
+MIT © Elio Struyf
+
+<div align="center">
+<a
+href="https://visitorbadge.io/status?path=https%3A%2F%2Fgithub.com%2Festruyf%2Fghostwriter-app"><img
+src="https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Festruyf%2Fghostwriter-app&countColor=%23263759"
+/></a>
+</div>
