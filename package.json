@@ -13,24 +13,59 @@
   },
   "homepage": "https://github.com/estruyf/ghostwriter-app#readme",
   "license": "MIT",
+  "main": "dist-electron/main.js",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "electron:build-ts": "tsc -p tsconfig.node.json",
+    "electron": "wait-on tcp:5173 && cross-env NODE_ENV=development electron .",
+    "electron:dev": "npm run electron:build-ts && concurrently -k \"npm run dev\" \"npm run electron\"",
+    "electron:build": "npm run build && npm run electron:build-ts && electron-builder"
+  },
+  "build": {
+    "appId": "com.ghostwriter.app",
+    "productName": "Ghostwriter",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "assets/**/*"
+    ],
+    "asarUnpack": [
+      "**/node_modules/@github/copilot/**/*",
+      "**/node_modules/@github/copilot-sdk/**/*",
+      "**/node_modules/@github/copilot-*-*/**/*"
+    ],
+    "icon": "assets/ghostwriter-app-icon.png",
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [
+        "dmg"
+      ]
+    }
   },
   "dependencies": {
-    "@astrojs/react": "^3.6.2",
     "@github/copilot-sdk": "^0.1.16",
     "@tailwindcss/vite": "^4.1.18",
-    "astro": "^5.16.14",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "streamdown": "^2.1.0"
   },
   "devDependencies": {
+    "@types/node": "^25.0.10",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
-    "tailwindcss": "^4.1.18"
+    "@vitejs/plugin-react": "^5.1.2",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "electron": "^40.0.0",
+    "electron-builder": "^26.4.0",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "wait-on": "^9.0.3"
   }
 }

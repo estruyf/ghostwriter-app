@@ -4,6 +4,7 @@
 @layer base {
   body {
     @apply min-h-screen text-[#e8edf5] antialiased;
+    overflow: hidden;
     background:
       radial-gradient(
         circle at 10% 20%,
@@ -23,5 +24,35 @@
       system-ui,
       -apple-system,
       sans-serif;
+  }
+}
+
+@layer components {
+  .app-titlebar {
+    -webkit-app-region: drag;
+    user-select: none;
+  }
+  .no-drag {
+    -webkit-app-region: no-drag;
+  }
+}
+
+@layer utilities {
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background: rgba(148, 163, 184, 0.2);
+    border-radius: 3px;
+  }
+
+  .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+    background: rgba(148, 163, 184, 0.4);
   }
 }
