@@ -28,9 +28,11 @@ transform ideas into polished written content through a two-step process:
   Google Gemini models (free and premium options)
 - **Voice Guide Support**: Upload custom style guidelines to maintain consistent
   tone and formatting
-- **Real-time Streaming**: See responses appear as the AI generates them
+- **Real-time Streaming Articles**: Article generation streams live with a
+  5-minute timeout and auto-scroll to the newest text
 - **Session Persistence**: Your work is automatically saved to localStorage
-- **Modern UI**: Built with Tailwind CSS 4 and Astro 5
+- **Modern UI**: Built with Tailwind CSS 4 and Astro 5, with consistent custom
+  scrollbars and external links opening in your default browser
 
 ## How to Use
 
@@ -49,11 +51,13 @@ npm install
 
 ### Running the App
 
+Desktop (Electron + Vite):
+
 ```sh
-npm run dev
+npm run electron:dev
 ```
 
-The app will start at `http://localhost:4321`
+This runs Vite at `http://localhost:5173` and launches the Electron shell.
 
 ### Workflow
 
@@ -61,7 +65,7 @@ The app will start at `http://localhost:4321`
    - **Get Interviewed**: Start an AI-driven interview to gather content
      material
    - **Write Article**: Convert an existing interview transcript into a polished
-     article
+     article (button is enabled once you select or import an interview)
 
 2. **Interview Mode**:
    - Select your preferred AI model from the dropdown
@@ -71,11 +75,12 @@ The app will start at `http://localhost:4321`
    - Click "Generate Transcript" to save your interview
 
 3. **Article Writer Mode**:
-   - Upload your interview transcript (markdown file)
+   - Upload your interview transcript (markdown file) or select a saved one
    - Optionally upload a voice/style guide
    - Select your preferred AI model
-   - Click "Generate Article" to create your polished content
-   - Download or copy the final article
+   - Click "Generate Article" to stream the article live
+   - Download or copy the final article (auto-scroll keeps the newest text in
+     view)
 
 ### Model Selection
 
