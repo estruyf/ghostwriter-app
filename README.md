@@ -4,7 +4,7 @@ A test project demonstrating the new
 [GitHub Copilot SDK](https://github.com/github/copilot-sdk) for building
 AI-powered content creation tools.
 
-![Ghostwriter App Screenshot](./assets/ghostwriter-app-screenshot.png)
+![Ghostwriter App Screenshot](./assets/ghostwriter-electron-screenshot.png)
 
 ## What is Ghostwriter?
 
@@ -49,15 +49,14 @@ transform ideas into polished written content through a two-step process:
 npm install
 ```
 
-### Running the App
-
-Desktop (Electron + Vite):
+### Running the App (Electron + Vite)
 
 ```sh
 npm run electron:dev
 ```
 
-This runs Vite at `http://localhost:5173` and launches the Electron shell.
+This runs Vite at `http://localhost:5173` and launches the Electron shell for
+the desktop app.
 
 ### Workflow
 
@@ -85,43 +84,28 @@ This runs Vite at `http://localhost:5173` and launches the Electron shell.
 ### Model Selection
 
 The app dynamically fetches available AI models from GitHub Copilot. Models are
-organized into:
-
-- **Free Models**: GPT-4.1, GPT-5 mini (included with your subscription)
-- **Premium Models**: Claude Sonnet 4.5, GPT-5, Gemini 3 Pro, and others (may
-  have usage multipliers)
+organized into free and premium (paid) tiers based on your Copilot subscription.
 
 ## Tech Stack
 
-- **Framework**: [Astro 5](https://astro.build/) with React 18
-- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
-- **AI SDK**: [GitHub Copilot SDK](https://github.com/github/copilot-sdk)
-- **Markdown**: [Streamdown](https://streamdown.ai/) for rendering
-- **State Management**: React hooks + localStorage
+- **Framework**: React 18 + Vite
+- **Desktop Shell**: Electron 40
+- **Styling**: Tailwind CSS 4
+- **AI SDK**: GitHub Copilot SDK
+- **Markdown Rendering**: Streamdown
+- **State**: React hooks + localStorage
 
 ## Project Structure
 
 ```text
-/
-├── public/
-├── src/
-│   ├── components/
-│   │   ├── App.tsx              # Main application state
-│   │   ├── Home.tsx             # Landing page
-│   │   ├── Interview.tsx        # Interview mode UI
-│   │   ├── ArticleWriter.tsx    # Article generation UI
-│   │   └── Results.tsx          # Display final output
-│   ├── pages/
-│   │   ├── index.astro          # Entry point
-│   │   └── api/
-│   │       ├── models/list.ts   # Fetch available AI models
-│   │       ├── interview/
-│   │       │   ├── start.ts     # Initialize interview session
-│   │       │   └── ask.ts       # Continue interview
-│   │       └── article/
-│   │           └── generate.ts  # Generate article from interview
-│   └── styles/
-│       └── tailwind.css         # Global styles
+/                  # Project root
+├── src/           # Renderer (Vite + React)
+│   ├── components/  # UI components (Home, Interview, ArticleWriter, Results)
+│   └── styles/      # Global styles
+├── electron/      # Main process (Electron) handlers and preload
+├── dist-electron/ # Built Electron output
+├── assets/        # App assets (icons, screenshots)
+├── release/       # Packaged app builds
 └── package.json
 ```
 
@@ -142,12 +126,12 @@ adapted to use the GitHub Copilot SDK instead of direct API integrations.
 
 ## Commands
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
+| Command                   | Action                                                     |
+| :------------------------ | :--------------------------------------------------------- |
+| `npm install`             | Install dependencies                                       |
+| `npm run electron:dev`    | Run Vite dev server and launch Electron shell              |
+| `npm run electron:build`  | Build web assets, compile Electron, and package the app    |
+| `npm run electron:build-ts` | Type-check/compile Electron main & preload TypeScript    |
 
 ## Learn More
 
