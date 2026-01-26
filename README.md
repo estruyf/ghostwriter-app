@@ -34,6 +34,10 @@ transform ideas into polished written content through a two-step process:
 - **Modern UI**: Built with Tailwind CSS 4 and Astro 5, with consistent custom
   scrollbars and external links opening in your default browser
 
+## Usage
+
+<video src="./assets/ghostwriter-app.mp4" controls></video>
+
 ## How to Use
 
 ### Prerequisites
