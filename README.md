@@ -36,7 +36,7 @@ transform ideas into polished written content through a two-step process:
 
 ## Usage
 
-<video src="./assets/ghostwriter-app.mp4" controls></video>
+![Ghostwriter App Screenshot](./assets/ghostwriter-app.gif)
 
 ## How to Use
 
