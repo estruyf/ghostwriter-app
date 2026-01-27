@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { listModels, listInterviews, listVoices, saveVoice, generateArticle as apiGenerateArticle } from '../lib/api';
+import { listModels, listInterviews, listVoices, saveVoice, generateArticle as apiGenerateArticle, isAuthenticationError } from '../lib/api';
 
 interface ArticleProps {
   onBack: () => void;
   onComplete: (article: string) => void;
+  onAuthenticationRequired?: () => void;
 }
 
 interface Interview {
@@ -18,7 +19,7 @@ interface VoiceProfile {
   content: string;
 }
 
-export default function ArticleWriter({ onBack, onComplete }: ArticleProps) {
+export default function ArticleWriter({ onBack, onComplete, onAuthenticationRequired }: ArticleProps) {
   const [interviewContent, setInterviewContent] = useState('');
   const [selectedInterviewId, setSelectedInterviewId] = useState('');
   const [interviews, setInterviews] = useState<Interview[]>([]);
@@ -207,6 +208,10 @@ export default function ArticleWriter({ onBack, onComplete }: ArticleProps) {
       }
     } catch (error) {
       console.error('Failed to generate article:', error);
+      // Check if it's an authentication error
+      if (isAuthenticationError(error)) {
+        onAuthenticationRequired?.();
+      }
       setArticle('Failed to generate article. Please try again.');
     } finally {
       clearInterval(messageInterval);

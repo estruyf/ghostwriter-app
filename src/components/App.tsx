@@ -6,6 +6,7 @@ import ArticleWriter from './ArticleWriter';
 import Results from './Results';
 import TitleBar from './TitleBar';
 import Sidebar from './Sidebar';
+import AuthenticationModal from './AuthenticationModal';
 
 type AppState = 'home' | 'interview' | 'article' | 'results';
 
@@ -26,6 +27,7 @@ export default function App() {
   const [isHydrated, setIsHydrated] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [sidebarRefresh, setSidebarRefresh] = useState<(() => void) | null>(null);
+  const [showAuthModal, setShowAuthModal] = useState(false);
 
   // Restore session from localStorage on mount
   useEffect(() => {
@@ -177,10 +179,11 @@ export default function App() {
               onInterviewCreated={setActiveInterviewId}
               isSidebarOpen={isSidebarOpen}
               onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+              onAuthenticationRequired={() => setShowAuthModal(true)}
             />
           )}
           {state === 'article' && (
-            <ArticleWriter onBack={handleBackToHome} onComplete={handleArticleComplete} />
+            <ArticleWriter onBack={handleBackToHome} onComplete={handleArticleComplete} onAuthenticationRequired={() => setShowAuthModal(true)} />
           )}
           {state === 'results' && (
             <Results
@@ -204,6 +207,9 @@ export default function App() {
           )}
         </div>
       </div>
+
+      {/* Authentication Modal */}
+      <AuthenticationModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
     </div>
   );
 }

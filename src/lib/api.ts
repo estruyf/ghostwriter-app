@@ -208,3 +208,27 @@ export async function generateArticle(
 
   throw new Error("Electron API not available");
 }
+
+export function isAuthenticationError(error: any): boolean {
+  if (!error) return false;
+
+  const errorMessage = error.message || error.toString() || "";
+  const lowerMessage = errorMessage.toLowerCase();
+
+  // Check for common authentication error patterns
+  const authPatterns = [
+    "you need to authenticate",
+    "authentication required",
+    "not authenticated",
+    "unauthenticated",
+    "unauthorized",
+    "invalid token",
+    "token expired",
+    "github.*auth",
+    "copilot.*auth",
+    "need.*login",
+    "need.*signin",
+  ];
+
+  return authPatterns.some((pattern) => new RegExp(pattern).test(lowerMessage));
+}

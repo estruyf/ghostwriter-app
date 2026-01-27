@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Streamdown } from 'streamdown';
-import { listModels, startInterview as apiStartInterview, askInterview as apiAskInterview, getInterview } from '../lib/api';
+import { listModels, startInterview as apiStartInterview, askInterview as apiAskInterview, getInterview, isAuthenticationError } from '../lib/api';
 
 interface Message {
   role: string;
@@ -14,9 +14,10 @@ interface InterviewProps {
   onInterviewCreated?: (id: string) => void;
   isSidebarOpen?: boolean;
   onToggleSidebar?: () => void;
+  onAuthenticationRequired?: () => void;
 }
 
-export default function Interview({ onBack, onComplete, interviewId, onInterviewCreated, isSidebarOpen, onToggleSidebar }: InterviewProps) {
+export default function Interview({ onBack, onComplete, interviewId, onInterviewCreated, isSidebarOpen, onToggleSidebar, onAuthenticationRequired }: InterviewProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -232,6 +233,10 @@ export default function Interview({ onBack, onComplete, interviewId, onInterview
       }
     } catch (error) {
       console.error('Failed to start interview:', error);
+      // Check if it's an authentication error
+      if (isAuthenticationError(error)) {
+        onAuthenticationRequired?.();
+      }
       // Remove the placeholder if it failed? Or show error in it.
       setMessages(prev => {
         if (isNew) {
@@ -341,6 +346,10 @@ export default function Interview({ onBack, onComplete, interviewId, onInterview
 
     } catch (error) {
       console.error('Failed to get response:', error);
+      // Check if it's an authentication error
+      if (isAuthenticationError(error)) {
+        onAuthenticationRequired?.();
+      }
       setMessages((prev) => {
         // Replace placeholder with error
         const updated = [...prev];
