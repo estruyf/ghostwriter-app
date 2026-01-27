@@ -47,6 +47,15 @@ transform ideas into polished written content through a two-step process:
 - A GitHub Copilot subscription
 - GitHub Copilot access configured in your environment
 
+### Install and Authenticate Copilot CLI
+
+1. Install the GitHub Copilot CLI by following the official guide:
+   https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli
+2. Authenticate in your terminal:
+  - Open your terminal
+  - Run `copilot`
+  - At the prompt, run `/login` and complete the browser sign-in flow
+
 ### Installation
 
 ```sh
