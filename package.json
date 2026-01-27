@@ -44,7 +44,28 @@
       "category": "public.app-category.productivity",
       "target": [
         "dmg"
-      ]
+      ],
+      "identity": null
+    },
+    "dmg": {
+      "sign": false,
+      "contents": [
+        {
+          "x": 130,
+          "y": 220,
+          "type": "file"
+        },
+        {
+          "x": 370,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 500,
+        "height": 500
+      }
     }
   },
   "dependencies": {

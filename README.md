@@ -71,6 +71,25 @@ npm run electron:dev
 This runs Vite at `http://localhost:5173` and launches the Electron shell for
 the desktop app.
 
+### Building and Creating a DMG Installer
+
+To create a distributable DMG file for macOS installation:
+
+```sh
+npm run electron:build
+```
+
+This will:
+1. Build the React app for production
+2. Compile the Electron main process
+3. Create a DMG installer in the `release/` directory
+
+The DMG file can then be distributed to users. They can mount the DMG and drag
+the Ghostwriter app to their Applications folder to install it.
+
+**Note**: The first build may take a few minutes as electron-builder downloads
+and prepares the necessary components.
+
 ### Workflow
 
 1. **Choose Your Mode**:
@@ -143,7 +162,7 @@ adapted to use the GitHub Copilot SDK instead of direct API integrations.
 | :------------------------ | :--------------------------------------------------------- |
 | `npm install`             | Install dependencies                                       |
 | `npm run electron:dev`    | Run Vite dev server and launch Electron shell              |
-| `npm run electron:build`  | Build web assets, compile Electron, and package the app    |
+| `npm run electron:build`  | Build and create a DMG installer for macOS distribution    |
 | `npm run electron:build-ts` | Type-check/compile Electron main & preload TypeScript    |
 
 ## Learn More
